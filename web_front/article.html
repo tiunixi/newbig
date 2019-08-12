@@ -56,12 +56,12 @@
     </div>
 
     <div class="main_con clearfix">
-      <div class="left_con setfr">
+      <div class="left_con">
         <div class="breadcrumb">
           当前位置： <a href="#">首页</a> &gt; <a href="#">科技</a> &gt;
           文章详情
         </div>
-        <h3 class="article_title">
+        <!-- <h3 class="article_title">
           马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱
         </h3>
         <div class="article_info">
@@ -87,7 +87,7 @@
           <p>
             2016年，Neuralink在美国加利福尼亚州以医学研究公司的名义成立，之后一直低调运行。
           </p>
-        </div>
+        </div> -->
         <div class="article_links">
           上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br />
           下一篇：
@@ -244,5 +244,36 @@
     <script src="./js/jquery-1.12.4.min.js"></script>
     <!-- 导入模板引擎 -->
     <script src="./js/template-web.js"></script>
+    <script type="text/template" id='act'>
+      
+      <h3 class="article_title">
+          {{title}}
+        </h3>
+        <div class="article_info">
+          {{author}} {{date}}&nbsp;&nbsp;&nbsp;分类:
+          {{type}}&nbsp;&nbsp;&nbsp;阅读: (98)&nbsp;&nbsp;&nbsp;评论: (0)
+        </div>
+        <div class="article_con">
+          <p>
+            {{@content}}
+          </p>
+        </div>
+    </script>
+
+    <script>
+    var  id =window.location.search.split('=')[1]
+    console.log(id)
+    $.get({
+      url : 'https://autumnfish.cn/big/admin/search',
+      data: {
+        id : id
+      },
+      success:function(res){
+        console.log(res)
+        $('.breadcrumb').next().html(template('act',res.data))
+
+      }
+    })
+    </script>
   </body>
 </html>

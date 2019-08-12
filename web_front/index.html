@@ -56,7 +56,7 @@
     <div class="main_con clearfix">
         <div class="left_con">
             <ul class="focus_list">
-                <li class="first">
+                <!-- <li class="first">
                     <a href="#"><img src="images/pic01.jpg" alt=""></a>
                     <p>图片说明</p>
                 </li>
@@ -75,7 +75,7 @@
                 <li>
                     <a href="#"><img src="images/pic06.jpg" alt=""></a>
                     <p>图片说明</p>
-                </li>
+                </li> -->
             </ul>
 
             <div class="common_title">
@@ -215,15 +215,46 @@
             <span>|</span>
             <a href="#">招聘人才</a>
             <span>|</span>
-            <a href="#">友情链接</a>		
+            <a href="#">友情链接</a>
         </div>
-        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司   All Rights Reserved</p>
-        <p>电话：0755-****888    粤ICP备*******8号</p>
+        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
+        <p>电话：0755-****888 粤ICP备*******8号</p>
     </div>
     <!-- js -->
     <script src="./js/jquery-1.12.4.min.js"></script>
     <!-- 导入模板引擎 -->
     <script src="./js/template-web.js"></script>
-    </body>
+
+    <script type="text/template " id="act_img">
+        {{each }}
+        {{if $index===0}}
+     <li class="first" date-id="{{$value.id}}">
+         {{else}}
+     <li>
+         {{/if}}
+        <a href="article.html?id={{$value.id}}"><img src="{{$value.cover}}" alt=""></a>
+        <p>{{$value.title}}</p>
+    </li>
+        {{/each}}
+    </script>
+
+    <script>
+        $.get({
+            // url : 'http://localhost:8000/admin/search',
+            url : 'https://autumnfish.cn/big/admin/search',
+            data:{
+                page :1,//第一页
+                perpage:5,//取5个
+            },
+            success:function (res)
+            {
+                console.log (res)
+                $('.focus_list').html(template('act_img',res.data))
+            }
+        })
+
+    </script>
+
+</body>
 
 </html>
