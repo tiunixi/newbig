@@ -232,12 +232,10 @@
       })
     })
 
-    //删除，在遍历each的时候，用deleteTr（传入了id值）
-
-    //用 自定义 属性 删除 data
-    $('tbody').on('click', '.btn-danger', function () {
-      var id = $(this).data('id')
-
+    //删除，
+    //方法一在遍历each的时候，用deleteTr（传入了id值）
+    function deleteTr (id){
+      
       var $tr = $(this).parents('tr')
 
       $.post({
@@ -250,11 +248,36 @@
           if (res.code === 200) {
             //移除
             $tr.remove()
+            location.reload()
           }
         }
       })
 
-    })
+    }
+    //方法二
+    //用 自定义 属性 删除 data
+    // $('tbody').on('click', '.btn-danger', function () {
+    //   var id = $(this).data('id')
+
+    //   var $tr = $(this).parents('tr')
+
+    //   $.post({
+    //     url: 'https://autumnfish.cn/big/admin/category_delete',
+    //     data: {
+    //       id: id
+    //     },
+    //     success: function (res) {
+    //       console.log(res)
+    //       if (res.code === 200) {
+    //         //移除
+    //         $tr.remove()
+    // location.reload()
+
+    //       }
+    //     }
+    //   })
+
+    // })
 
 
     // 4 设置编辑功能
